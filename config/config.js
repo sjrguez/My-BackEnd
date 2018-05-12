@@ -1,0 +1,1 @@
+module.exports.SEED = "@este-e$-un-seed-dificil";
