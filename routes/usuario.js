@@ -28,9 +28,12 @@ app.get('/', (req, res) => {
                 })
             }
 
-            res.status(200).json({
-                ok: true,
-                usuarioDB: usuarioDB
+            Usuario.count(query, (error, conteo) => {
+                res.status(200).json({
+                    ok: true,
+                    usuario: usuarioDB,
+                    total: conteo
+                })
             })
         })
 
@@ -40,7 +43,7 @@ app.get('/', (req, res) => {
 
 // ======================== // Crear usuarios // ========================
 
-app.post('/', mdAutenticacion.VerificarToken, (req, res) => {
+app.post('/', (req, res) => {
 
     var body = req.body
 
@@ -71,7 +74,7 @@ app.post('/', mdAutenticacion.VerificarToken, (req, res) => {
 
 // ======================== // Obtener un usuario // ========================
 
-app.get('/:id', mdAutenticacion.VerificarToken, (req, res) => {
+app.get('/:id', (req, res) => {
 
     var id = req.params.id
 
@@ -95,6 +98,7 @@ app.get('/:id', mdAutenticacion.VerificarToken, (req, res) => {
                 })
             }
 
+            UsuarioDB.password = ""
             res.status(200).json({
                 ok: true,
                 usuario: UsuarioDB
@@ -107,7 +111,7 @@ app.get('/:id', mdAutenticacion.VerificarToken, (req, res) => {
 
 // ======================== // Actualizar un usuario // ========================
 
-app.put('/:id', mdAutenticacion.VerificarToken, (req, res) => {
+app.put('/:id', (req, res) => {
 
     var body = req.body
     var id = req.params.id
@@ -157,7 +161,7 @@ app.put('/:id', mdAutenticacion.VerificarToken, (req, res) => {
 
 // ======================== // Elimianr un usuario // ========================
 
-app.delete('/:id', mdAutenticacion.VerificarToken, (req, res) => {
+app.delete('/:id', (req, res) => {
 
     var id = req.params.id
 

@@ -4,6 +4,18 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
 
+
+// Inicializacion del App
+var app = express();
+
+// CORS
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE,OPTIONS");
+    next();
+});
+
 // Importar rutas
 
 var appRoutes = require('./routes/app')
@@ -12,11 +24,6 @@ var usuarioRoutes = require('./routes/usuario')
 var loginRoutes = require('./routes/login')
 var suplidorRoutes = require('./routes/suplidor')
 var productoRoutes = require('./routes/producto')
-
-
-// Inicializacion del App
-var app = express();
-
 
 // parse Body
 app.use(bodyParser.urlencoded({ extended: false }))

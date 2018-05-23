@@ -35,7 +35,7 @@ app.get('/', (req, res, next) => {
 
 // ======================== // Agregar tipo de usu// ========================
 
-app.post('/', mdAutenticacion.VerificarToken, (req, res) => {
+app.post('/', (req, res) => {
 
         var body = req.body
 
@@ -63,7 +63,7 @@ app.post('/', mdAutenticacion.VerificarToken, (req, res) => {
     })
     // ======================== // Obtener tipo de usuario // ========================
 
-app.get('/:id', mdAutenticacion.VerificarToken, (req, res) => {
+app.get('/:id', (req, res) => {
     var id = req.params.id
 
     TipoUsu.findById(id, (error, tipousuDB) => {
@@ -97,7 +97,7 @@ app.get('/:id', mdAutenticacion.VerificarToken, (req, res) => {
 // ======================== // Actualizar tipo de usuario // ========================
 
 
-app.put('/:id', mdAutenticacion.VerificarToken, (req, res) => {
+app.put('/:id', (req, res) => {
 
     var id = req.params.id
     var body = req.body
@@ -120,6 +120,7 @@ app.put('/:id', mdAutenticacion.VerificarToken, (req, res) => {
         }
 
         tipo_usu.nombre = body.nombre
+        tipo_usu.descripcion = body.descripcion
 
         tipo_usu.save((error, tipoActualizado) => {
             if (error) {
@@ -143,7 +144,7 @@ app.put('/:id', mdAutenticacion.VerificarToken, (req, res) => {
 
 // ======================== // Eliminar tipo de usuario // ========================
 
-app.delete('/:id', mdAutenticacion.VerificarToken, (req, res) => {
+app.delete('/:id', (req, res) => {
     var id = req.params.id
 
     TipoUsu.findByIdAndUpdate(id, { $set: { estado: 2 } }, (error, tipoEliminado) => {
